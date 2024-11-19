@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+    // background-color: orangered;
+}
+header{
+    background-color: rgb(178, 104, 104);
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+    #logo{
+        img{
+            width: 50px;
+            height: 50px;
+        }
+    }
+    nav{
+        flex-direction: row;
+    }
+}
+
+main{
+    color: black;
+    background-color: #cabdbd;
+    max-width: 1000px;
+    margin: auto;
+    padding: 10px;
+    button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    #popup {
+        position: absolute;
+        margin: auto;
+        // transform: translate(-50%, -50%);
+        width: 300px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #ccc;
+        display: none;
+        z-index: 1000;
+        #popupText {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            word-wrap: break-word;
+        }
+    }
+
+}

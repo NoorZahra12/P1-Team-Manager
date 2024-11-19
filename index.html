@@ -3,237 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class List Editor</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    h1 {
-        text-align: center;
-        margin: 20px 0;
-    }
-
-    .container {
-        display: flex;
-        gap: 20px;
-        max-width: 800px;
-        width: 100%;
-    }
-
-    /* Scrollable List Section */
-    .list-section {
-        width: 30%;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        overflow-y: auto;
-        max-height: 400px;
-    }
-
-    .list-section h2 {
-    margin-top: 0;
-    }
-
-    .list-item {
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #f9f9f9;
-    }
-
-    .list-item:hover {
-    background-color: #e9e9e9;
-    }
-
-    .list-item.active {
-    background-color: #cce5ff;
-    border-color: #007bff;
-    }
-
-    /* Editable Details Section */
-    .details-section {
-    width: 70%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    }
-
-    .details-section h2 {
-    margin-top: 0;
-    }
-
-    .form-group {
-    margin-bottom: 15px;
-    }
-
-    .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    }
-
-    .form-group input, .form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    }
-
-    .form-group textarea {
-    resize: vertical;
-    }
-
-    .buttons {
-    display: flex;
-    gap: 10px;
-    }
-
-    .buttons button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    }
-
-    .buttons .save-btn {
-    background-color: #007bff;
-    color: #fff;
-    }
-
-    .buttons .delete-btn {
-    background-color: #dc3545;
-    color: #fff;
-    }
-
-    .buttons .save-btn:hover {
-    background-color: #0056b3;
-    }
-
-    .buttons .delete-btn:hover {
-    background-color: #c82333;
-    }
-    </style>
-    </head>
-    <body>
-
-    <h1>Class List Editor</h1>
-
-    <div class="container">
-        <!-- Scrollable List Section -->
-        <section class="list-section">
-        <h2>Classes</h2>
-        <div class="list-item" onclick="selectClass('ClassA')">ClassA</div>
-        <div class="list-item" onclick="selectClass('ClassB')">ClassB</div>
-        <div class="list-item" onclick="selectClass('ClassC')">ClassC</div>
+    <title>Team Manager</title>
+    <link rel="icon" href= "./merchlogo.png" type="image/x-icon"> 
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+<body>
+    <header>
+        <p onclick="changeSection()">Intro Meeting</p>
+        <p onclick="changeSection()">Teams</p>
+        <p onclick="changeSection()">All meetings</p>
+    </header>
+    <main>
+        <section class="IntroMeeting">
+            <!-- basic info -->
+            <input type="text" placeholder="Host Name">
+            <label for="meetingDate">Date:</label>
+            <input type="date" id="meetingDate">
+            <label for="meetingTime">Time:</label>
+            <select id="meetingTime">
+                <option value="early">Early</option>
+                <option value="late">Late</option>
+            </select>
+            <button onclick="generateTeamMatch()">Find Teams</button>
+            <button onclick="showPopup()">Ticket</button>
+            <div id="popup">
+                <div id="popupText">This is the text you can copy.</div>
+                <button onclick="copyText()">Copy Text</button>
+                <button onclick="closePopup()">Close</button>
+            </div>
+            <br> <br>
+            <!-- excel -->
+            <article>
+                <table id="excelTable" border="1">
+                    <thead>
+                        <tr>
+                            <th>Recruit</th>
+                            <th>Brief</th>
+                            <th>Team</th>
+                            <th>Team Leader</th>
+                            <th>Assigned to</th>
+                            <th>Intro Givers</th>
+                            <th>Assigned</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- discord name -->
+                            <td contenteditable="true"></td>
+                            <!-- roles -->
+                            <td contenteditable="true"></td>
+                            <td contenteditable="true"></td>
+                            <td></td>
+                            <td contenteditable="true"><select name="" id="">Assign to</select></td>
+                            <td contenteditable="true"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button>Add row</button>
+                <button onclick="exportToExcel()">Export to Excel</button>
+            </article>
+            <br>
+            <!-- add meeting -->
+            <button onclick="addMeeting()">Add Meeting</button>
         </section>
-
-        <!-- Editable Details Section -->
-        <section class="details-section">
-        <h2>Class Details</h2>
-        <div id="details-form">
-            <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" placeholder="Class name">
-            </div>
-            <div class="form-group">
-            <label for="attribute1">Attribute 1:</label>
-            <input type="text" id="attribute1" placeholder="Attribute 1">
-            </div>
-            <div class="form-group">
-            <label for="attribute2">Attribute 2:</label>
-            <input type="text" id="attribute2" placeholder="Attribute 2">
-            </div>
-            <div class="buttons">
-            <button class="save-btn" onclick="saveDetails()">Save</button>
-            <button class="delete-btn" onclick="deleteClass()">Delete</button>
-            </div>
-        </div>
-        </section>
-    </div>
-
-    <script>
-    // Placeholder data for classes
-    const classes = [
-        { name: "ClassA", attribute1: "Value1", attribute2: "Value2" },
-        { name: "ClassB", attribute1: "Value3", attribute2: "Value4" },
-        { name: "ClassC", attribute1: "Value5", attribute2: "Value6" }
-    ];
-
-    // Populate form with selected class details
-    function selectClass(className) {
-        const selectedClass = classes.find(c => c.name === className);
-        if (selectedClass) {
-            document.getElementById("name").value = selectedClass.name;
-            document.getElementById("attribute1").value = selectedClass.attribute1;
-            document.getElementById("attribute2").value = selectedClass.attribute2;
-
-            // Highlight the active item
-            document.querySelectorAll(".list-item").forEach(item => item.classList.remove("active"));
-            const activeItem = Array.from(document.querySelectorAll(".list-item")).find(item => item.textContent === className);
-            if (activeItem) activeItem.classList.add("active");
-        }
-    }
-
-    // Save edited details
-    async function saveDetails() {
-    const newClass = {
-        name: document.getElementById("name").value,
-        attribute1: document.getElementById("attribute1").value,
-        attribute2: document.getElementById("attribute2").value,
-    };
-
-    const response = await fetch("/api/updateJson", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newClass),
-    });
-
-    if (response.ok) {
-        alert("Class updated successfully!");
-    } else {
-        alert("Error updating class!");
-    }
-    }
-
-        const classIndex = classes.findIndex(c => c.name === name);
-        if (classIndex >= 0) {
-        // Update existing class
-        classes[classIndex] = { name, attribute1, attribute2 };
-        } else {
-        // Add new class
-        classes.push({ name, attribute1, attribute2 });
-        }
-
-        alert("Class saved!");
-        console.log(classes); // Debugging: View updated classes
-
-    // Delete selected class
-    function deleteClass() {
-        const name = document.getElementById("name").value;
-        const classIndex = classes.findIndex(c => c.name === name);
-        if (classIndex >= 0) {
-            classes.splice(classIndex, 1);
-            alert(`${name} deleted!`);
-            document.getElementById("name").value = "";
-            document.getElementById("attribute1").value = "";
-            document.getElementById("attribute2").value = "";
-            console.log(classes); // Debugging: View updated classes
-        }
-    }
-    </script>
-
+        <section></section>
+        <section></section>
+    </main>
+    <script src="./scripts/popup.js"></script>
+    <script src="./scripts/addMeeting.js"></script>
 </body>
 </html>

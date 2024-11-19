@@ -1,0 +1,5 @@
+[
+    { "name": "ClassA", "attribute1": "Value1", "attribute2": "Value2" },
+    { "name": "ClassB", "attribute1": "Value3", "attribute2": "Value4" },
+    { "name": "ClassC", "attribute1": "Value5", "attribute2": "Value6" }
+]  
