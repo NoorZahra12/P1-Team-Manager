@@ -7,6 +7,7 @@ body {
 
 header {
   background-color: rgb(178, 104, 104);
+  padding: 10px;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -18,24 +19,25 @@ header button {
   cursor: pointer;
 }
 
-main {
-  color: black;
-  background-color: #cabdbd;
-  max-width: 1000px;
-  margin: auto;
-  padding: 10px;
-}
-main button {
+button {
   padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
 }
-main button:hover {
+
+button:hover {
   background-color: #0056b3;
 }
-main #popup {
+
+main {
+  color: black;
+  max-width: 1000px;
+  margin: auto;
+  padding: 10px;
+}
+main #IntroMeeting #popup {
   position: absolute;
   margin: auto;
   width: 300px;
@@ -46,7 +48,7 @@ main #popup {
   display: none;
   z-index: 1000;
 }
-main #popup #popupText {
+main #IntroMeeting #popup #popupText {
   margin-bottom: 10px;
   font-size: 14px;
   color: #333;
@@ -55,4 +57,16 @@ main #popup #popupText {
   border: 1px solid #ddd;
   border-radius: 4px;
   word-wrap: break-word;
+}
+main #IntroMeeting table {
+  border-collapse: collapse;
+  width: 100%;
+}
+main #IntroMeeting th, main #IntroMeeting td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+main #IntroMeeting input, main #IntroMeeting select {
+  margin-bottom: 10px;
 }/*# sourceMappingURL=index.css.map */

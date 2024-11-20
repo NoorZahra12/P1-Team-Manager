@@ -11,12 +11,11 @@
     <header>
         <button onclick="changeSection()">Intro Meeting</button>
         <button onclick="changeSection()">Teams</button>
-        <button onclick="changeSection()">All meetings</button>
     </header>
     <main>
-        <section class="IntroMeeting">
+        <section id="IntroMeeting" style="display: block;">
             <!-- basic info -->
-            <input type="text" placeholder="Host Name">
+            <input type="text" placeholder="Host Name" id="hostName">
             <label for="meetingDate">Date:</label>
             <input type="date" id="meetingDate">
             <label for="meetingTime">Time:</label>
@@ -24,17 +23,16 @@
                 <option value="early">Early</option>
                 <option value="late">Late</option>
             </select>
-            <button onclick="generateTeamMatch()">Find Teams</button>
-            <button onclick="showPopup()">Ticket</button>
+            <!-- <button onclick="generateTeamMatch()">Find Teams</button> -->
             <div id="popup">
-                <div id="popupText">This is the text you can copy.</div>
-                <button onclick="copyText()">Copy Text</button>
+                <div id="popupText"></div>
                 <button onclick="closePopup()">Close</button>
+                <button onclick="copyText()">Copy Text</button>
             </div>
             <br><br>
             <!-- excel -->
             <article>
-                <table id="excelTable" border="1">
+                <table id="excelTable">
                     <thead>
                         <tr>
                             <th>Recruit</th>
@@ -42,35 +40,26 @@
                             <th>Team</th>
                             <th>Team Leader</th>
                             <th>Assigned to</th>
+                            <th>Registered</th>
+                            <th>Verify</th>
                             <th>Intro Givers</th>
                             <th>Assigned</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <!-- discord name -->
-                            <td contenteditable="true"></td>
-                            <!-- roles -->
-                            <td contenteditable="true"></td>
-                            <td contenteditable="true"></td>
-                            <td></td>
-                            <td contenteditable="true"><select name="" id="">Assign to</select></td>
-                            <td contenteditable="true"></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
                 </table>
-                <button>Add row</button>
-                <button onclick="exportToExcel()">Export to Excel</button>
+                <button id="addRowButton">Add Row</button>
             </article>
             <br>
-            <!-- add meeting -->
-            <button onclick="addMeeting()">Add Meeting</button>
+            <button onclick="copyTableToClipboard()" id="copyBtn">Copy Table</button>
+            <button onclick="showPopup()">Make Ticket</button>
         </section>
-        <section></section>
-        <section></section>
+        <section id="TeamNeeds" style="display: none;">
+            <img src="./meme/wip.gif" alt="work in progress">
+        </section>
     </main>
     <script src="./scripts/popup.js"></script>
-    <script src="./scripts/ReadandWriteJsons.js"></script>
+    <script src="./scripts/fillingForm.js"></script>
+    <script src="./scripts/copyTable.js"></script>
+    <script src="./scripts/changeSections.js"></script>
 </body>
 </html>
