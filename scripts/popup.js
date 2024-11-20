@@ -7,7 +7,7 @@ function copyText() {
     const text = textElement.textContent;
 
     if (text) {
-        // Create a temporary input element for copying
+        // temporary input element for copying
         const tempInput = document.createElement('textarea');
         document.body.appendChild(tempInput);
         tempInput.value = text;
@@ -34,7 +34,7 @@ function showPopup() {
     // Iterate through the rows in the table (skip the header)
     for (let i = 1; i < table.rows.length; i++) {
         const row = table.rows[i];
-        const recruitName = row.cells[0]?.textContent.trim(); // Recruit name
+        const recruitName = row.cells[0]?.textContent.trim(); // Rookie's name
         const teamName = row.cells[2]?.textContent.trim(); // Team name
         const introGiver = row.cells[7]?.textContent.trim(); // Intro Giver name
 
@@ -62,7 +62,5 @@ function showPopup() {
     // Combine the texts and update the popup content
     const finalText = recruitsText + (introGiversText.trim() ? introGiversText : '');
     popupTextElement.textContent = finalText;
-
-    // Show the popup
     document.getElementById('popup').style.display = 'block';
 }
