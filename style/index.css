@@ -2,7 +2,6 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  word-break: break-all;
 }
 
 header {
@@ -36,6 +35,9 @@ main {
   max-width: 1000px;
   margin: auto;
   padding: 10px;
+}
+main #IntroMeeting {
+  overflow-x: scroll;
 }
 main #IntroMeeting #popup {
   position: absolute;

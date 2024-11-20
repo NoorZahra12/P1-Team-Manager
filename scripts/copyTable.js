@@ -8,16 +8,24 @@ function copyTableToClipboard() {
     const table = document.getElementById('excelTable');
     let tableText = '';
 
-    // Add the labels for the first row (header)
-    tableText += 'Date\tTime\tHost\tRecruit\tBrief\tTeam\tTeam Leader\tAssigned to\tRegistered\tVerify\tIntro Givers\tAssigned\n';
+    // Add the main header with Date, Time, and Host
+    tableText += 'Date\tTime\tHost\tRecruit\tBrief\tTeam\tAssigned to\tRegistered\tVerify\tIntro Givers\tPeople Helped\n';
 
-    // Add the form values (date, time, host) in the second row
-    tableText += `${meetingDate}\t${meetingTime}\t${hostName}\t`;
-
-    // Add the table rows
-    for (let i = 1; i < table.rows.length; i++) { // Start from 1 to skip the header
+    // Iterate over the table rows (skip both the table header and its content)
+    for (let i = 1; i < table.rows.length; i++) { // Start from 1 to skip the <thead>
         const row = table.rows[i];
         const rowText = [];
+
+        // Add Date, Time, and Host only for the first data row
+        if (i === 1) {
+            rowText.push(meetingDate || ''); // Add Date
+            rowText.push(meetingTime || ''); // Add Time
+            rowText.push(hostName || '');   // Add Host
+        } else {
+            rowText.push('', '', ''); // Leave these cells empty for other rows
+        }
+
+        // Process the rest of the row cells
         for (let j = 0; j < row.cells.length; j++) {
             const cell = row.cells[j];
             if (cell.querySelector('.dropdownChanger')) {
@@ -31,7 +39,8 @@ function copyTableToClipboard() {
                 rowText.push(cell.textContent.trim());
             }
         }
-        tableText += rowText.join('\t') + '\n';
+
+        tableText += rowText.join('\t') + '\n'; // Join row values with tab and add a new line
     }
 
     // Copy the text to the clipboard

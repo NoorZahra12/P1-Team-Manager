@@ -6,7 +6,6 @@ function manageRows(count = 10) {
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
             <td contenteditable="true"></td>
-            <td contenteditable="true"></td>
             <td>
                 <select class="dropdownChanger">
                     <option value=""></option>

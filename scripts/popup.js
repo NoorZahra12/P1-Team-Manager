@@ -7,7 +7,7 @@ function copyText() {
     const text = textElement.textContent;
 
     if (text) {
-        // temporary input element for copying
+        // Temporary input element for copying
         const tempInput = document.createElement('textarea');
         document.body.appendChild(tempInput);
         tempInput.value = text;
@@ -15,13 +15,11 @@ function copyText() {
         document.execCommand('copy');
         document.body.removeChild(tempInput);
 
-        alert('Text copied to clipboard!');
+        alert('You can now paste it in a ticket!');
     } else {
         alert('No text to copy!');
     }
 }
-
-
 
 function showPopup() {
     const popupTextElement = document.getElementById('popupText');
@@ -29,33 +27,23 @@ function showPopup() {
     let recruitsText = 'Recruits:\n';
     let introGiversText = '\nIntro Givers:\n';
 
-    const introGiverCounts = {}; // To count how many recruits each intro giver helped
-
     // Iterate through the rows in the table (skip the header)
     for (let i = 1; i < table.rows.length; i++) {
         const row = table.rows[i];
-        const recruitName = row.cells[0]?.textContent.trim(); // Rookie's name
-        const teamName = row.cells[2]?.textContent.trim(); // Team name
-        const introGiver = row.cells[7]?.textContent.trim(); // Intro Giver name
 
-        // Add recruit and team information to the text
-        if (recruitName && teamName) {
+        // Recruits Section
+        const recruitName = row.cells[0]?.textContent.trim(); // Rookie's name
+        const teamName = row.cells[2]?.textContent.trim() || 'no team yet'; // Team name or "no team yet"
+        if (recruitName) {
             recruitsText += `${recruitName} --> ${teamName}\n`;
         }
 
-        // Count the number of recruits helped by each intro giver
-        if (introGiver) {
-            if (!introGiverCounts[introGiver]) {
-                introGiverCounts[introGiver] = 0;
-            }
-            introGiverCounts[introGiver]++;
-        }
-    }
+        // Intro Givers Section
+        const introGiver = row.cells[6]?.textContent.trim(); // Intro Giver's name
+        const peopleHelped = row.cells[7]?.textContent.trim(); // Number of people helped
 
-    // Add intro giver summary to the text, but only include those with counts > 0
-    for (const [giver, count] of Object.entries(introGiverCounts)) {
-        if (count > 0) {
-            introGiversText += `${giver} --> ${count}\n`;
+        if (introGiver && peopleHelped && parseInt(peopleHelped) > 0) {
+            introGiversText += `${introGiver} --> ${peopleHelped}\n`;
         }
     }
 
