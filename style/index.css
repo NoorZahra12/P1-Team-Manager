@@ -5,7 +5,7 @@ body {
 }
 
 header {
-  background-color: rgb(178, 104, 104);
+  background-color: grey;
   padding: 10px;
   display: flex;
   justify-content: center;
